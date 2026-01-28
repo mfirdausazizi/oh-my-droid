@@ -1,4 +1,4 @@
-//**
+/**
  * TDD Guide Agent
  * Adapted for Factory Droid from oh-my-claudecode
  *

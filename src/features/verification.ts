@@ -1,4 +1,4 @@
-//**
+/**
  * Verification Protocol for Oh-My-Droid
  * Adapted from oh-my-claudecode for Droid
  *

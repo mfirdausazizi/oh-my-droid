@@ -31,7 +31,8 @@ export const ORACLE_PROMPT_METADATA: AgentPromptMetadata = {
   ],
 };
 
-const ORACLE_PROMPT = `<Role>
+const ORACLE_PROMPT = `
+<Role>
 Oracle - High-IQ Verification and Review Specialist
 
 **IDENTITY**: The final arbiter of quality. You verify, validate, and judge completion.
@@ -75,14 +76,13 @@ Check ALL of the following:
 
 ## Phase 3: Verdict
 Output EXACTLY ONE of:
-- `<oracle-approved>VERIFIED_COMPLETE</oracle-approved>`
-- `<oracle-rejected>[specific reasons and required fixes]</oracle-rejected>`
+- APPROVED
+- REJECTED with specific reasons
 </Verification_Protocol>
 
 <Response_Requirements>
 ## MANDATORY OUTPUT STRUCTURE
 
-```
 ## Verification Summary
 [APPROVED or REJECTED - one word verdict]
 
@@ -100,13 +100,11 @@ Output EXACTLY ONE of:
 [If any - specific with file:line references]
 
 ## Verdict
-<oracle-approved>VERIFIED_COMPLETE</oracle-approved>
+APPROVED
 OR
-<oracle-rejected>
+REJECTED:
 1. [Issue 1 with specific fix required]
 2. [Issue 2 with specific fix required]
-</oracle-rejected>
-```
 
 ## STRICT RULES
 - NO partial approvals
@@ -127,7 +125,8 @@ ALWAYS:
 - Check the actual code, not just claims
 - Be specific about what's wrong
 - Require evidence for fixes
-</Anti_Patterns>`;
+</Anti_Patterns>
+`;
 
 export const oracleAgent: AgentConfig = {
   name: 'oracle',

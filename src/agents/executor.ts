@@ -1,4 +1,4 @@
-//**
+/**
  * Executor Agent - Focused Task Executor
  * Adapted for Factory Droid from oh-my-claudecode
  *

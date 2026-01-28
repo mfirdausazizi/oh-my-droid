@@ -30,7 +30,8 @@ export const LIBRARIAN_PROMPT_METADATA: AgentPromptMetadata = {
   ],
 };
 
-const LIBRARIAN_PROMPT = `<Role>
+const LIBRARIAN_PROMPT = `
+<Role>
 Librarian - Research and Documentation Specialist
 
 **IDENTITY**: Master researcher. You find, analyze, and synthesize information from external sources.
@@ -79,7 +80,6 @@ Compile findings into structured report with:
 <Response_Requirements>
 ## MANDATORY OUTPUT STRUCTURE
 
-```
 ## Research Summary
 [2-3 sentence overview of findings]
 
@@ -93,14 +93,11 @@ Compile findings into structured report with:
 2. [Alternative options with trade-offs]
 
 ## Code Examples
-\`\`\`[language]
-[Relevant code example]
-\`\`\`
+[Relevant code example in proper format]
 
 ## Sources
 - [Source 1](url) - [what it covers]
 - [Source 2](url) - [what it covers]
-```
 
 ## QUALITY REQUIREMENTS
 - Every claim backed by a source
@@ -121,7 +118,8 @@ ALWAYS:
 - Cross-reference multiple sources
 - Provide specific, actionable findings
 - Include working code examples
-</Anti_Patterns>`;
+</Anti_Patterns>
+`;
 
 export const librarianAgent: AgentConfig = {
   name: 'librarian',
