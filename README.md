@@ -4,31 +4,32 @@
 
 *Don't learn Droid. Just use OMD.*
 
-Oh-My-Droid brings the power of [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) to [Factory AI's Droid CLI](https://factory.ai), featuring a Sisyphus-style orchestrator, custom droids (Oracle, Librarian, Architect, Executor), and intelligent execution modes.
+Oh-My-Droid brings the power of [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) to [Factory AI's Droid CLI](https://factory.ai), featuring a Sisyphus-style orchestrator, 21 tiered droids, intelligent execution modes, and a memory system.
 
 ## Quick Start
 
-### Option 1: Install from npm (when published)
+### Install as Droid Plugin (Recommended)
+
+```bash
+# Add the marketplace
+droid plugin marketplace add https://github.com/Kartvya69/oh-my-droid
+
+# Install the plugin
+droid plugin install oh-my-droid@oh-my-droid
+
+# Initialize the orchestrator (one-time setup)
+/omd-init
+```
+
+### Alternative: Install from npm
+
 ```bash
 npm install -g oh-my-droid
 omd install
 ```
 
-### Option 2: Install from source (local development)
-```bash
-git clone https://github.com/Kartvya69/oh-my-droid.git
-cd oh-my-droid
-./install.sh link    # or: npm link
-```
+### Start Using
 
-### Option 3: Quick setup script
-```bash
-git clone https://github.com/Kartvya69/oh-my-droid.git
-cd oh-my-droid
-./scripts/link.sh
-```
-
-**Use Magic Keywords**
 ```
 autopilot: build a REST API for managing tasks
 ```
@@ -39,10 +40,11 @@ That's it. Everything else is automatic.
 
 - **Zero configuration** - Works out of the box with Droid's native systems
 - **Natural language interface** - No commands to memorize, just describe what you want
-- **Custom droids** - Oracle, Librarian, Architect, Executor, and more
+- **21 Tiered Droids** - Low/Medium/High variants for smart token optimization
 - **Automatic parallelization** - Complex tasks distributed across specialized agents
 - **Persistent execution** - Ralph mode won't give up until the job is verified complete
-- **Droid-native** - Leverages Droid's skills, custom droids, and specification mode
+- **Memory system** - Remember decisions and preferences across sessions
+- **Hooks** - Automatic keyword detection and memory capture
 
 ## Features
 
@@ -51,33 +53,54 @@ That's it. Everything else is automatic.
 | Mode | Keyword | Description |
 |------|---------|-------------|
 | **Autopilot** | `autopilot:` | Full autonomous execution |
-| **Ultrawork** | `ulw:` or `ultrawork:` | Maximum parallel execution |
+| **Ultrawork** | `ulw:` or `ultrawork:` | Maximum parallel execution (5-10+ agents) |
 | **Ralph** | `ralph:` | Persistence until verified complete |
-| **Ultrapilot** | `ultrapilot:` | Parallel autonomous execution |
+| **Swarm** | `swarm N:type` | N coordinated agents on shared tasks |
 | **Ecomode** | `eco:` | Token-efficient execution |
-| **Swarm** | `swarm:` | Coordinated parallel agents |
 | **Plan** | `plan:` | Specification mode |
 
-### Custom Droids
+### Tiered Droids (21 Total)
 
-| Droid | Model | Purpose |
-|-------|-------|---------|
-| **oracle** | claude-opus | Verification & critical review |
-| **librarian** | claude-sonnet | Research & documentation |
-| **architect** | claude-opus | Architecture & debugging |
-| **executor** | inherit | Implementation |
-| **explore** | claude-haiku | Fast codebase search |
-| **security-reviewer** | claude-opus | Security auditing |
+| Tier | Droids | Use Case |
+|------|--------|----------|
+| **LOW** | architect-low, executor-low, explore, designer-low, researcher-low | Simple lookups, quick tasks |
+| **MEDIUM** | architect-medium, executor, explore-medium, designer, researcher, librarian, qa-tester, writer | Standard work |
+| **HIGH** | architect, executor-high, designer-high, oracle, planner, critic, analyst, security-reviewer | Complex analysis, verification |
 
-### Slash Commands
+### Slash Commands (11 Total)
 
-- `/autopilot` - Full autonomous execution
-- `/ultrawork` - Maximum parallel execution
-- `/ralph` - Persistence mode
-- `/plan` - Specification mode
-- `/code-review` - AI-powered code review
-- `/security` - Security audit
-- `/analyze` - Deep codebase analysis
+| Command | Description |
+|---------|-------------|
+| `/omd-init` | Initialize orchestrator (run once after install) |
+| `/autopilot` | Full autonomous execution |
+| `/ultrawork` | Maximum parallel execution |
+| `/ralph` | Persistence mode |
+| `/plan` | Specification mode |
+| `/swarm` | Coordinated multi-agent |
+| `/cancel` | Stop all background tasks |
+| `/doctor` | System diagnostics |
+| `/research` | Deep research mode |
+| `/tdd` | Test-driven development |
+| `/hud` | Status display |
+
+### Skills (8 Total)
+
+- **autopilot** - Autonomous execution
+- **ultrawork** - Parallel execution with 5-10+ agents
+- **ralph** - Persistence until verified
+- **plan** - Specification mode
+- **swarm** - Coordinated multi-agent
+- **memory-capture** - Save memories with `#text` or `remember this:`
+- **cancel** - Stop background tasks
+- **ecomode** - Token-efficient mode
+
+### Hooks
+
+- **keyword-detector** - Auto-detect magic keywords
+- **memory-capture** - Capture `#text` to memories
+- **session-start** - Resume active modes
+- **persistent-mode** - Ralph persistence enforcement
+- **pre-tool-enforcer** - Delegation reminders
 
 ## Usage Examples
 
@@ -87,67 +110,78 @@ autopilot: build a todo app with React and Node.js
 
 ralph: migrate the entire codebase to TypeScript
 
-ulw: refactor all components in the src/ directory
+ultrawork: refactor all components in the src/ directory
 
-plan: design the authentication system
+swarm 5:executor fix all TypeScript errors
+
+eco: add input validation to the form
 ```
 
-### Custom Droids
+### Swarm Mode
+```
+/swarm 5:executor "fix all lint errors"
+/swarm 3:designer "implement responsive layouts"
+/swarm 4:writer "add JSDoc to all functions"
+```
+
+### Memory System
+```
+#we use the repository pattern for data access
+##I prefer functional components over class components
+remember this: auth tokens expire after 24 hours
+```
+
+### Tiered Droid Selection
 ```typescript
-// Spawn Oracle for verification
-Task(subagent_type="oracle", prompt="Verify this implementation")
+// Simple lookup → LOW tier (saves tokens)
+Task(subagent_type="architect-low", prompt="What does this function return?")
 
-// Spawn Librarian for research
-Task(subagent_type="librarian", prompt="Research best practices for JWT auth")
+// Standard work → MEDIUM tier
+Task(subagent_type="executor", prompt="Add error handling to login")
 
-// Spawn Architect for design
-Task(subagent_type="architect", prompt="Design the data model")
+// Complex analysis → HIGH tier
+Task(subagent_type="oracle", prompt="Verify this implementation is complete")
 ```
-
-### Parallel Execution (Ultrawork)
-```
-ultrawork: implement user authentication with:
-- Login/signup forms
-- JWT token handling
-- Password reset flow
-- Email verification
-```
-
-The orchestrator will spawn multiple custom droids in parallel:
-- **librarian** researches JWT best practices
-- **architect** designs the auth flow
-- **executor** implements the forms
-- **oracle** verifies the security
 
 ## Installation
 
-### Global Install
+### As Droid Plugin (Recommended)
+
+```bash
+# Add marketplace and install
+droid plugin marketplace add https://github.com/Kartvya69/oh-my-droid
+droid plugin install oh-my-droid@oh-my-droid
+
+# Initialize (one-time) - sets up AGENTS.md orchestrator
+/omd-init
+```
+
+### From npm
+
 ```bash
 npm install -g oh-my-droid
 omd install
-```
-
-### Project Install
-```bash
-npm install --save-dev oh-my-droid
-npx omd install --project
 ```
 
 ## Configuration
 
 Oh-My-Droid uses Droid's native configuration:
 
-- `~/.factory/settings.json` - Droid settings
-- `~/.factory/droids/` - Custom droids
-- `~/.factory/skills/` - Skills
-- `./AGENTS.md` - Project guidelines
+| File | Purpose |
+|------|---------|
+| `~/.factory/AGENTS.md` | Orchestrator system prompt (created by `/omd-init`) |
+| `~/.factory/memories.md` | Personal memory/preferences |
+| `.omd/memories.md` | Project-specific memory |
+| `.omd/state/` | State files for ralph, ultrawork, swarm |
 
 ## How It Works
 
 ```
-User Input → Magic Keyword Detection → Skill Activation
+User Input → Keyword Detection Hook → Skill Activation
                                               ↓
-                                   Custom Droid Spawning
+                                   AGENTS.md Orchestrator
+                                              ↓
+                                   Tiered Droid Spawning
                                               ↓
                                    Parallel Execution
                                               ↓
@@ -156,16 +190,10 @@ User Input → Magic Keyword Detection → Skill Activation
                                    Task Complete
 ```
 
-## Documentation
-
-- [Architecture](docs/ARCHITECTURE.md) - How OMD works
-- [Reference](docs/REFERENCE.md) - Complete feature documentation
-- [Migration](docs/MIGRATION.md) - Upgrade guide
-
 ## Requirements
 
 - [Factory Droid CLI](https://factory.ai)
-- Node.js 20+
+- Node.js 18+
 
 ## License
 
@@ -173,6 +201,6 @@ MIT
 
 ## Credits
 
-Inspired by [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) and [oh-my-opencode](https://github.com/code-yeongyu/oh-my-opencode).
+Inspired by [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode).
 
 **Zero learning curve. Maximum power.**
