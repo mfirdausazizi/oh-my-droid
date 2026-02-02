@@ -1,0 +1,14 @@
+{
+  "name": "oh-my-droid",
+  "description": "Multi-agent orchestration for Factory Droid",
+  "owner": {
+    "name": "Kartvya69"
+  },
+  "plugins": [
+    {
+      "name": "oh-my-droid",
+      "description": "Multi-agent orchestration with custom droids, skills, and slash commands",
+      "source": "./"
+    }
+  ]
+}

@@ -17,15 +17,18 @@ Use Ultrawork mode when you need:
 
 When Ultrawork mode is active:
 
-1. **Identify** all independent subtasks
-2. **Spawn** custom droids IN PARALLEL via Task tool:
-   - `oracle` for verification
+1. **Analyze** the task and break it into AS MANY independent subtasks as possible
+2. **Spawn at minimum 5-10 agents** - more for complex tasks
+3. **There is NO limit** on concurrent agents - spawn as many as needed
+4. **Spawn** custom droids IN PARALLEL via Task tool:
+   - `explore` for codebase search (spawn multiple for different areas)
    - `librarian` for research
    - `architect` for design
-   - `executor` for implementation
-3. **Use** `run_in_background=true` for independent tasks
-4. **Synthesize** results from all droids
+   - `executor` for implementation (spawn multiple for different files/features)
+   - `oracle` for verification
 5. **NEVER** do sequential what can be parallel
+6. **Maximize parallelism** - if in doubt, spawn more agents
+7. **Synthesize** results from all droids
 
 ## Example
 

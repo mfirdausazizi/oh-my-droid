@@ -1,0 +1,55 @@
+{
+  "UserPromptSubmit": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node \"${DROID_PLUGIN_ROOT}/hooks/keyword-detector.mjs\"",
+          "timeout": 5
+        },
+        {
+          "type": "command",
+          "command": "node \"${DROID_PLUGIN_ROOT}/hooks/memory-capture.mjs\"",
+          "timeout": 3
+        }
+      ]
+    }
+  ],
+  "SessionStart": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node \"${DROID_PLUGIN_ROOT}/hooks/session-start.mjs\"",
+          "timeout": 5
+        }
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node \"${DROID_PLUGIN_ROOT}/hooks/persistent-mode.mjs\"",
+          "timeout": 5
+        }
+      ]
+    }
+  ],
+  "PreToolUse": [
+    {
+      "matcher": "Edit|Create",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node \"${DROID_PLUGIN_ROOT}/hooks/pre-tool-enforcer.mjs\"",
+          "timeout": 3
+        }
+      ]
+    }
+  ]
+}
