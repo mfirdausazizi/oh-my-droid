@@ -1,6 +1,6 @@
 ---
 name: ralph
-description: Persistence mode - continues until verified complete
+description: Use when user wants guaranteed task completion with verification, or uses 'ralph:', 'persist:', 'don't stop until'
 ---
 
 # Ralph Skill (Persistence Mode)

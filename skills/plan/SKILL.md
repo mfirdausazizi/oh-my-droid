@@ -1,6 +1,6 @@
 ---
 name: plan
-description: Specification mode with planning interview
+description: Use when user wants to plan before implementing, or uses 'plan:', 'spec:' keywords
 ---
 
 # Plan Skill (Specification Mode)

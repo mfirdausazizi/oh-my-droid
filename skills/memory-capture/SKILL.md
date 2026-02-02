@@ -1,6 +1,6 @@
 ---
 name: memory-capture
-description: Capture and store memories for future reference
+description: Use when user wants to save information for later, uses '#text', '##text', or 'remember this:'
 ---
 
 # Memory Capture Skill

@@ -1,6 +1,6 @@
 ---
 name: ultrawork
-description: Maximum parallel execution with multiple custom droids
+description: Use when user needs maximum parallelism, multiple agents working simultaneously, or uses 'ultrawork:', 'ulw:' keywords
 ---
 
 # Ultrawork Skill

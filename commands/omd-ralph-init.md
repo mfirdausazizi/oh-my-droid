@@ -1,0 +1,51 @@
+---
+description: Initialize a PRD for structured ralph-loop execution
+argument-hint: <feature-description>
+---
+
+# Ralph Init
+
+[RALPH-INIT - PRD CREATION MODE]
+
+Create a PRD (Product Requirements Document) that structures your task into discrete user stories for ralph-loop execution.
+
+## Task
+
+$ARGUMENTS
+
+## PRD Structure
+
+Creates `.omd/prd.json`:
+
+```json
+{
+  "project": "[Project Name]",
+  "branchName": "ralph/[feature-name]",
+  "description": "[Feature description]",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "[Short title]",
+      "description": "As a [user], I want to [action] so that [benefit].",
+      "acceptanceCriteria": ["Criterion 1", "Typecheck passes"],
+      "priority": 1,
+      "passes": false
+    }
+  ]
+}
+```
+
+## Guidelines
+
+1. **Right-sized stories**: Each completable in one focused session
+2. **Verifiable criteria**: Include "Typecheck passes", "Tests pass"
+3. **Independent stories**: Minimize dependencies between stories
+4. **Priority order**: Foundational work (DB, types) before UI
+
+## Output
+
+After creating files:
+- `.omd/prd.json` - The PRD
+- `.omd/progress.txt` - Progress log
+
+Then suggest running `/omd-ralph` to start execution.

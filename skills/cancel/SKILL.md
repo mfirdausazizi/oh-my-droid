@@ -1,6 +1,6 @@
 ---
 name: cancel
-description: Cancel all running background tasks
+description: Use when user wants to stop running background agents or cancel ongoing tasks
 ---
 
 # Cancel Skill

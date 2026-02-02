@@ -1,6 +1,6 @@
 ---
 name: ecomode
-description: Token-efficient execution mode
+description: Use when user wants to minimize token usage, or uses 'eco:', 'ecomode:', 'budget mode'
 ---
 
 # Ecomode Skill

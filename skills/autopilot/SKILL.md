@@ -1,6 +1,6 @@
 ---
 name: autopilot
-description: Full autonomous execution with medium auto-run level
+description: Use when user wants autonomous task execution without constant approval, or uses keywords like 'autopilot:', 'auto:', 'build me'
 ---
 
 # Autopilot Skill

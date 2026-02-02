@@ -1,6 +1,6 @@
 ---
 name: swarm
-description: Coordinated multi-agent task execution with parallel workers
+description: Use when user wants multiple coordinated agents on a shared task, or uses 'swarm:' keyword
 ---
 
 # Swarm Skill
