@@ -1,7 +1,7 @@
 ---
 name: build-fixer-low
 description: Quick build error fixer for simple compilation issues
-model: haiku
+model: inherit
 tools: ["Read", "Grep", "Edit", "Execute"]
 ---
 

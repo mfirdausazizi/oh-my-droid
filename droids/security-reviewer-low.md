@@ -1,7 +1,7 @@
 ---
 name: security-reviewer-low
 description: Quick security scan for simple changes and obvious vulnerabilities
-model: haiku
+model: inherit
 tools: ["Read", "Grep", "Glob"]
 ---
 

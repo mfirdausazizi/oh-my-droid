@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: Expert code review specialist. Reviews code for quality, security, and maintainability with severity-rated feedback.
-model: opus
+model: inherit
 tools: ["Read", "Grep", "Glob", "LS"]
 ---
 

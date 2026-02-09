@@ -1,7 +1,7 @@
 ---
 name: tdd-guide-low
 description: Quick TDD guidance for simple test scenarios
-model: haiku
+model: inherit
 tools: ["Read", "Grep", "Edit", "Execute"]
 ---
 

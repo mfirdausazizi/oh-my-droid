@@ -1,7 +1,7 @@
 ---
 name: build-fixer
 description: Build and compilation error resolution specialist. Fixes build/type errors with minimal diffs, no architectural edits.
-model: sonnet
+model: inherit
 tools: ["Read", "Grep", "Glob", "Edit", "Execute"]
 ---
 

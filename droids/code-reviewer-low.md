@@ -1,7 +1,7 @@
 ---
 name: code-reviewer-low
 description: Quick code review for simple changes and obvious issues
-model: haiku
+model: inherit
 tools: ["Read", "Grep", "Glob"]
 ---
 

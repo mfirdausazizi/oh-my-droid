@@ -1,7 +1,7 @@
 ---
 name: tdd-guide
 description: Test-Driven Development specialist enforcing write-tests-first methodology
-model: sonnet
+model: inherit
 tools: ["Read", "Grep", "Glob", "Edit", "Execute"]
 ---
 

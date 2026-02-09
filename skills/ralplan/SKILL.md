@@ -58,6 +58,27 @@ Track state in `.omd/ralplan-state.json`:
 }
 ```
 
+## User Confirmation Gate
+
+After the Critic approves the plan (or max iterations reached):
+
+1. **Save the plan** to `.omd/plans/[feature-name].md` immediately
+2. **Present the plan** to the user with a concise summary
+3. **Use the AskUser tool** to get explicit confirmation before handing off to execution:
+
+```
+1. [question] The plan is saved to .omd/plans/[feature-name].md. How should we proceed?
+[topic] Plan-Approval
+[option] Approve and proceed to execution
+[option] Revise the plan (provide feedback)
+[option] Cancel
+```
+
+4. If the user requests revisions, incorporate feedback and re-run the Critic loop
+5. Only proceed to the next workflow stage after explicit user approval
+
+**CRITICAL**: Never skip the AskUser confirmation. The user must approve the saved plan before any execution begins.
+
 ## Output
 
 Plan saved to `.omd/plans/[feature-name].md` ready for `/omd-ralph` execution.

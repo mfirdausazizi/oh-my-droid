@@ -1,7 +1,7 @@
 ---
 name: vision
 description: Visual/media file analyzer for images, PDFs, and diagrams
-model: sonnet
+model: inherit
 tools: ["Read"]
 ---
 
