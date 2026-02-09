@@ -4,9 +4,10 @@
  * Initialize session and load state
  */
 
-import { readFileSync, existsSync, mkdirSync } from 'fs';
+import { readFileSync, existsSync, mkdirSync, readdirSync, statSync, copyFileSync } from 'fs';
 import { homedir } from 'os';
-import { join } from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 try {
   const projectDir = process.env.FACTORY_PROJECT_DIR || process.cwd();
@@ -16,6 +17,48 @@ try {
   // Create .omd/state if doesn't exist
   if (!existsSync(stateDir)) {
     mkdirSync(stateDir, { recursive: true });
+  }
+
+  try {
+    const scriptDir = dirname(fileURLToPath(import.meta.url));
+    const pluginRoot = process.env.DROID_PLUGIN_ROOT || dirname(scriptDir);
+    const sourceDir = join(pluginRoot, 'commands');
+    const destinationDir = join(homedir(), '.factory', 'commands');
+
+    if (existsSync(sourceDir)) {
+      mkdirSync(destinationDir, { recursive: true });
+
+      const commandFiles = readdirSync(sourceDir, { withFileTypes: true })
+        .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+        .map((entry) => entry.name);
+
+      let copiedCount = 0;
+
+      for (const fileName of commandFiles) {
+        const sourceFile = join(sourceDir, fileName);
+        const destinationFile = join(destinationDir, fileName);
+
+        let shouldCopy = !existsSync(destinationFile);
+        if (!shouldCopy) {
+          shouldCopy = statSync(sourceFile).mtimeMs > statSync(destinationFile).mtimeMs;
+        }
+
+        if (shouldCopy) {
+          copyFileSync(sourceFile, destinationFile);
+          copiedCount += 1;
+        }
+      }
+
+      if (copiedCount > 0) {
+        console.log(JSON.stringify({
+          additionalContext: `[OMD] Synced ${copiedCount} command file${copiedCount === 1 ? '' : 's'} to ${destinationDir}`
+        }));
+      }
+    }
+  } catch (e) {
+    console.log(JSON.stringify({
+      additionalContext: `[OMD] Warning: could not sync command files to ~/.factory/commands (${e.message || 'unknown error'})`
+    }));
   }
 
   // Check for active ralph state

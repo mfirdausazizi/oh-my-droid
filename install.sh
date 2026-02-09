@@ -134,10 +134,12 @@ setup_omd_config() {
 
     OMD_DIR="$HOME/.omd"
     DROIDS_DIR="$HOME/.factory/droids"
+    COMMANDS_DIR="$HOME/.factory/commands"
 
     # Create directories
     mkdir -p "$OMD_DIR"/{state,skills,hooks}
     mkdir -p "$DROIDS_DIR"
+    mkdir -p "$COMMANDS_DIR"
 
     # Create default config if not exists
     if [ ! -f "$OMD_DIR/config.json" ]; then
@@ -166,6 +168,18 @@ EOF
     if [ -d "droids" ]; then
         cp -r droids/* "$DROIDS_DIR/" 2>/dev/null || true
         print_success "Installed custom droids to ~/.factory/droids/"
+    fi
+
+    copied_commands=0
+    for command_file in commands/omd-*.md; do
+        if [ -f "$command_file" ]; then
+            cp "$command_file" "$COMMANDS_DIR/"
+            copied_commands=$((copied_commands + 1))
+        fi
+    done
+
+    if [ "$copied_commands" -gt 0 ]; then
+        print_success "Installed $copied_commands slash command file(s) to ~/.factory/commands/"
     fi
 
     print_success "OMD configuration complete"
