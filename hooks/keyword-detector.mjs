@@ -9,8 +9,6 @@ import { readFileSync } from 'fs';
 const KEYWORDS = {
   'autopilot:': { skill: 'autopilot', description: 'Full autonomous execution' },
   'auto:': { skill: 'autopilot', description: 'Full autonomous execution' },
-  'build me': { skill: 'autopilot', description: 'Full autonomous execution' },
-  'create a': { skill: 'autopilot', description: 'Full autonomous execution' },
   'ralph:': { skill: 'ralph', description: 'Persistence mode' },
   'persist:': { skill: 'ralph', description: 'Persistence mode' },
   "don't stop until": { skill: 'ralph', description: 'Persistence mode' },
@@ -32,20 +30,73 @@ const KEYWORDS = {
   'analysis:': { skill: 'analyze', description: 'Deep codebase analysis' },
 };
 
+function sanitizePrompt(prompt) {
+  return prompt
+    .replace(/\u001b\[[0-9;?]*[ -/]*[@-~]/g, '')
+    .replace(/\u001b\][^\u0007]*(\u0007|\u001b\\)/g, '');
+}
+
+function shouldSkipKeywordDetection(prompt) {
+  const trimmed = prompt.trim();
+
+  if (!trimmed) {
+    return true;
+  }
+
+  if (/^\/[a-z0-9._-]+(?:\s|$)/i.test(trimmed)) {
+    return true;
+  }
+
+  if (trimmed.includes('/omd-')) {
+    return true;
+  }
+
+  if (trimmed.startsWith('---')) {
+    return true;
+  }
+
+  return false;
+}
+
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function findKeywordMatch(promptLower) {
+  for (const [keyword, config] of Object.entries(KEYWORDS)) {
+    const pattern = keyword.endsWith(':')
+      ? new RegExp(`(^|\\s)${escapeRegex(keyword)}`, 'i')
+      : new RegExp(`(^|\\s)${escapeRegex(keyword)}(?=\\s|$|[.,!?;:])`, 'i');
+
+    const match = pattern.exec(promptLower);
+    if (match) {
+      return {
+        keyword,
+        config,
+        index: match.index + match[1].length,
+      };
+    }
+  }
+
+  return null;
+}
+
 try {
   const input = JSON.parse(readFileSync(0, 'utf-8'));
-  const prompt = input.prompt || '';
-  const promptLower = prompt.toLowerCase().trim();
+  const prompt = sanitizePrompt(input.prompt || '');
 
-  for (const [keyword, config] of Object.entries(KEYWORDS)) {
-    if (promptLower.includes(keyword)) {
-      const keywordIndex = promptLower.indexOf(keyword);
-      const taskContent = prompt.slice(keywordIndex + keyword.length).trim();
-      console.log(JSON.stringify({
-        additionalContext: `[OMD] Detected "${keyword}" - Activating ${config.skill} skill for: ${taskContent}`
-      }));
-      break;
-    }
+  if (shouldSkipKeywordDetection(prompt)) {
+    process.exit(0);
+  }
+
+  const promptLower = prompt.toLowerCase();
+  const detected = findKeywordMatch(promptLower);
+
+  if (detected) {
+    const taskContent = prompt.slice(detected.index + detected.keyword.length).trim();
+    console.log(JSON.stringify({
+      additionalContext: `[OMD] Detected "${detected.keyword}" - Activating ${detected.config.skill} skill for: ${taskContent}`
+    }));
   }
 } catch (e) {
   // Silent fail - don't block user input
