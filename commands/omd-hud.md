@@ -9,7 +9,7 @@ Show current Oh-My-Droid status and active operations.
 ## Display
 
 1. **Active Mode**
-   - Current mode (normal, autopilot, ralph, ultrawork, swarm)
+   - Current mode (normal, autopilot, ship, ralph, swarm)
    - Iteration count if in ralph mode
 
 2. **Todo Progress**
@@ -23,7 +23,6 @@ Show current Oh-My-Droid status and active operations.
 
 4. **State Files**
    - ralph-state.json status
-   - ultrawork-state.json status
    - swarm.db status
 
 5. **Memory**

@@ -4,7 +4,7 @@
  * Initialize session and load state
  */
 
-import { readFileSync, existsSync, mkdirSync, readdirSync, statSync, copyFileSync } from 'fs';
+import { readFileSync, existsSync, mkdirSync, readdirSync, statSync, copyFileSync, unlinkSync } from 'fs';
 import { homedir } from 'os';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -24,12 +24,27 @@ try {
     const pluginRoot = process.env.DROID_PLUGIN_ROOT || dirname(scriptDir);
     const sourceDir = join(pluginRoot, 'commands');
     const destinationDir = join(homedir(), '.factory', 'commands');
+    const retiredCommandFiles = new Set([
+      'omd-ultraqa.md',
+      'omd-ultrawork.md',
+      'omd-ultrapilot.md',
+      'omd-ecomode.md',
+      'omd-tdd.md',
+      'omd-psm.md',
+    ]);
 
     if (existsSync(sourceDir)) {
       mkdirSync(destinationDir, { recursive: true });
 
+      for (const fileName of retiredCommandFiles) {
+        const destinationFile = join(destinationDir, fileName);
+        if (existsSync(destinationFile)) {
+          unlinkSync(destinationFile);
+        }
+      }
+
       const commandFiles = readdirSync(sourceDir, { withFileTypes: true })
-        .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+        .filter((entry) => entry.isFile() && entry.name.endsWith('.md') && !retiredCommandFiles.has(entry.name))
         .map((entry) => entry.name);
 
       let copiedCount = 0;
@@ -74,18 +89,6 @@ try {
     } catch (e) {}
   }
 
-  // Check for active ultrawork state
-  const ultraworkState = join(stateDir, 'ultrawork-state.json');
-  if (existsSync(ultraworkState)) {
-    try {
-      const state = JSON.parse(readFileSync(ultraworkState, 'utf-8'));
-      if (state.active) {
-        console.log(JSON.stringify({
-          additionalContext: `[OMD] Resuming ultrawork mode with ${state.agentCount} agents. Task: ${state.task}`
-        }));
-      }
-    } catch (e) {}
-  }
 } catch (e) {
   // Silent fail
 }

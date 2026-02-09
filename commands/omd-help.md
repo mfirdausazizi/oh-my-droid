@@ -42,17 +42,6 @@ Include these words naturally in your request for explicit control:
 | `/omd-doctor` | System diagnostics |
 | `/omd-help` | This help |
 
-## Soft-deprecated
-
-These commands are soft-deprecated; prefer `/omd-ship` for the default workflow:
-
-- `/omd-ultraqa`
-- `/omd-ultrawork`
-- `/omd-ultrapilot`
-- `/omd-ecomode`
-- `/omd-tdd`
-- `/omd-psm`
-
 ## First Time Setup
 
 ```

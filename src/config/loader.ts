@@ -67,10 +67,7 @@ export const DEFAULT_CONFIG: PluginConfig = {
   },
   magicKeywords: {
     autopilot: ['autopilot:', 'auto:'],
-    ultrawork: ['ultrawork:', 'ulw:'],
     ralph: ['ralph:', 'persist:'],
-    ultrapilot: ['ultrapilot:', 'ulp:'],
-    ecomode: ['ecomode:', 'eco:'],
     swarm: ['swarm:', 'parallel:'],
     pipeline: ['pipeline:', 'pipe:'],
     plan: ['plan:', 'spec:'],

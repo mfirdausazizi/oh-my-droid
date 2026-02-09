@@ -33,7 +33,7 @@ Analyze Oh-My-Droid usage patterns and provide personalized recommendations.
 - Are you using the right tier for tasks?
 
 ### Efficiency
-- Could you benefit from ecomode?
+- Are you using the ship workflow effectively?
 - Are you using parallelism effectively?
 
 ### Recommendations
@@ -52,9 +52,9 @@ Based on your patterns:
 - Least used: /omd-swarm (2%)
 
 ### Recommendations
-1. Try /omd-ultrawork for complex tasks
-2. Use ecomode for simple fixes
-3. Consider /omd-pipeline for reviews
+1. Use /omd-ship for complex tasks
+2. Consider /omd-pipeline for reviews
+3. Use /omd-ralplan when planning needs extra rigor
 
 ### Optimization Tips
 - You could save tokens by using LOW tier for searches

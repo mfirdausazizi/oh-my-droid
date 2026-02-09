@@ -170,9 +170,26 @@ EOF
         print_success "Installed custom droids to ~/.factory/droids/"
     fi
 
+    RETIRED_COMMAND_FILES=(
+        "omd-ultraqa.md"
+        "omd-ultrawork.md"
+        "omd-ultrapilot.md"
+        "omd-ecomode.md"
+        "omd-tdd.md"
+        "omd-psm.md"
+    )
+
+    for retired_file in "${RETIRED_COMMAND_FILES[@]}"; do
+        rm -f "$COMMANDS_DIR/$retired_file"
+    done
+
     copied_commands=0
     for command_file in commands/omd-*.md; do
         if [ -f "$command_file" ]; then
+            command_name="$(basename "$command_file")"
+            if [[ " ${RETIRED_COMMAND_FILES[*]} " == *" $command_name "* ]]; then
+                continue
+            fi
             cp "$command_file" "$COMMANDS_DIR/"
             copied_commands=$((copied_commands + 1))
         fi

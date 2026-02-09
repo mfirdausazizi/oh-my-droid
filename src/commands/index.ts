@@ -57,24 +57,6 @@ Stage 4 (Review): run code-review
 Task: {{args}}
 `,
   },
-  ultrawork: {
-    name: 'ultrawork',
-    description: '[Soft-deprecated] Maximum parallel execution with multiple custom droids',
-    usage: '/ultrawork [task description]',
-    category: 'execution',
-    prompt: `
-Enter ULTRAWORK mode. Execute with MAXIMUM PARALLELISM:
-1. Identify all independent subtasks
-2. Spawn custom droids IN PARALLEL:
-   - oracle for verification
-   - librarian for research
-   - architect for design  
-   - executor for implementation
-3. Synthesize results
-
-Task: {{args}}
-`,
-  },
   ralph: {
     name: 'ralph',
     description: 'Persistence mode - continues until verified complete',

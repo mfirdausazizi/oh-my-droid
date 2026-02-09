@@ -21,25 +21,23 @@ Guide users on Oh-My-Droid capabilities and usage.
 
 | Keyword | Effect |
 |---------|--------|
+| **ship:** | Primary end-to-end flow |
 | **ralph:** | Persistence mode |
-| **ultrawork:** / **ulw:** | Max parallelism |
 | **plan:** | Planning interview |
-| **eco:** | Token-efficient mode |
 
 ## Available Commands
 
 | Command | Description |
 |---------|-------------|
 | `/omd-init` | One-time setup |
+| `/omd-ship` | Primary end-to-end flow |
 | `/omd-autopilot` | Autonomous execution |
-| `/omd-ultrawork` | Maximum parallelism |
 | `/omd-ralph` | Persistence mode |
 | `/omd-plan` | Specification mode |
 | `/omd-swarm` | Multi-agent coordination |
 | `/omd-code-review` | Code review |
 | `/omd-security-review` | Security audit |
 | `/omd-analyze` | Deep analysis |
-| `/omd-tdd` | Test-driven development |
 | `/omd-doctor` | System diagnostics |
 | `/omd-help` | This help |
 

@@ -23,7 +23,6 @@ When cancel is activated:
 2. **Clear pending work** in any queues
 3. **Mark state files as cancelled**:
    - `.omd/state/ralph-state.json` → set active: false
-   - `.omd/state/ultrawork-state.json` → set active: false
 4. **Report** what was cancelled
 
 ## Usage

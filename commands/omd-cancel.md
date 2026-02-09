@@ -12,6 +12,6 @@ Stop all running background tasks and cancel any ongoing operations.
 2. **Clear any pending work** in the task queue
 3. **Report** what was cancelled
 
-If there are ralph or ultrawork state files in `.omd/state/`, mark them as cancelled.
+If there is an active ralph state file in `.omd/state/`, mark it as cancelled.
 
 $ARGUMENTS

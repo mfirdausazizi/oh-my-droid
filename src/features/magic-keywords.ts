@@ -9,10 +9,7 @@
 export const DEFAULT_MAGIC_KEYWORDS: Record<string, string[]> = {
   autopilot: ['autopilot:', 'auto:', 'build me', 'create a'],
   ship: ['ship:', 'ship mode', 'ship workflow'],
-  ultrawork: ['ultrawork:', 'ulw:', 'maximum parallel', 'parallel everything'],
   ralph: ['ralph:', 'persist:', "don't stop until", 'keep going until'],
-  ultrapilot: ['ultrapilot:', 'ulp:', 'parallel autopilot'],
-  ecomode: ['ecomode:', 'eco:', 'efficient mode', 'budget mode'],
   swarm: ['swarm:', 'swarm ', 'parallel agents'],
   pipeline: ['pipeline:', 'pipe:', 'stage:', 'sequential:'],
   plan: ['plan:', 'spec:', 'spec mode', 'planning mode'],
@@ -24,10 +21,7 @@ export const DEFAULT_MAGIC_KEYWORDS: Record<string, string[]> = {
 export const MODE_DESCRIPTIONS: Record<string, string> = {
   autopilot: 'Full autonomous execution with medium auto-run level',
   ship: 'Recommended primary flow: discover, plan, execute, and review',
-  ultrawork: 'Maximum parallel execution with multiple custom droids',
   ralph: 'Persistence mode - continues until verified complete',
-  ultrapilot: 'Parallel autonomous execution',
-  ecomode: 'Token-efficient execution with model switching',
   swarm: 'Coordinated parallel agent swarm',
   pipeline: 'Sequential multi-stage processing',
   plan: 'Specification mode with planning interview',
@@ -146,19 +140,6 @@ Stage 4 (Review): Run code-review and provide recommendation.
 Output concise handoff between stages.
 </ship-mode>`,
 
-    ultrawork: `<ultrawork-mode>
-MAXIMUM PARALLEL EXECUTION MODE.
-
-MANDATORY: You MUST leverage ALL available custom droids via Task tool:
-- Spawn oracle for verification
-- Spawn librarian for research  
-- Spawn architect for design
-- Spawn executor for implementation
-- Run them IN PARALLEL when independent
-
-PARALLEL EXECUTION IS REQUIRED. Never do sequential what can be parallel.
-</ultrawork-mode>`,
-
     ralph: `<ralph-mode>
 PERSISTENCE MODE ENGAGED. You CANNOT stop until the task is VERIFIED complete.
 
@@ -181,14 +162,6 @@ SPECIFICATION MODE. Plan BEFORE implementing.
 
 Use ExitSpecMode tool when planning is complete.
 </plan-mode>`,
-
-    ecomode: `<ecomode>
-TOKEN-EFFICIENT MODE. Minimize costs:
-- Use Haiku for simple tasks
-- Use Sonnet for standard tasks  
-- Reserve Opus for complex reasoning only
-- Batch operations when possible
-</ecomode>`,
 
     swarm: `<swarm-mode>
 SWARM MODE. Launch multiple parallel agents:

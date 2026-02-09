@@ -76,10 +76,7 @@ export interface PluginConfig {
   magicKeywords?: {
     autopilot?: string[];
     ship?: string[];
-    ultrawork?: string[];
     ralph?: string[];
-    ultrapilot?: string[];
-    ecomode?: string[];
     swarm?: string[];
     pipeline?: string[];
     plan?: string[];

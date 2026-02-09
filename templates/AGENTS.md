@@ -111,9 +111,9 @@ Return: APPROVED or REJECTED with reasons.")
 </Verification>
 
 <Parallel_Execution>
-## Ultrawork Mode (Maximum Parallelism)
+## High Parallelism Mode
 
-When ultrawork is active:
+When maximum parallel execution is needed:
 
 1. **Spawn at minimum 5-10 agents** - more for complex tasks
 2. **There is NO limit** on concurrent agents

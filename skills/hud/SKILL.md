@@ -19,7 +19,7 @@ Toggle and configure the Oh-My-Droid status line display.
 ## What HUD Shows
 
 The status line displays:
-- Current mode (autopilot, ralph, ultrawork, etc.)
+- Current mode (ship, autopilot, ralph, swarm)
 - Active agents count
 - Background tasks status
 - Memory usage indicator
@@ -42,9 +42,9 @@ The HUD requires configuration in `~/.factory/settings.json`:
 | State | Display |
 |-------|---------|
 | Idle | `[OMD] Ready` |
+| Ship | `[OMD] Ship: <stage>` |
 | Autopilot | `[OMD] Autopilot: <task>` |
 | Ralph | `[OMD] Ralph: <progress>` |
-| Ultrawork | `[OMD] Ultrawork: <agents> agents` |
 | Swarm | `[OMD] Swarm: <n> workers` |
 
 ## Troubleshooting

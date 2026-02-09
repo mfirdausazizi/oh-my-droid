@@ -41,23 +41,6 @@ When ship mode is active:
     triggerPatterns: ['ship:', '/omd-ship', 'ship workflow'],
   },
   {
-    name: 'ultrawork',
-    description: 'Maximum parallel execution with multiple custom droids',
-    instructions: `
-When ultrawork mode is active:
-1. Identify all independent subtasks
-2. Spawn custom droids IN PARALLEL via Task tool:
-   - oracle for verification
-   - librarian for research
-   - architect for design
-   - executor for implementation
-3. Use run_in_background=true for independent tasks
-4. Synthesize results from all droids
-5. NEVER do sequential what can be parallel
-`,
-    triggerPatterns: ['ultrawork:', 'ulw:', 'maximum parallel'],
-  },
-  {
     name: 'ralph',
     description: 'Persistence mode - continues until verified complete',
     instructions: `
@@ -88,19 +71,6 @@ When plan mode is active:
 6. Use ExitSpecMode tool when planning is complete
 `,
     triggerPatterns: ['plan:', 'spec:', 'spec mode'],
-  },
-  {
-    name: 'ecomode',
-    description: 'Token-efficient execution with model switching',
-    instructions: `
-When ecomode is active:
-1. Use Haiku for simple tasks
-2. Use Sonnet for standard tasks
-3. Reserve Opus for complex reasoning only
-4. Batch operations when possible
-5. Minimize token usage
-`,
-    triggerPatterns: ['ecomode:', 'eco:', 'efficient mode'],
   },
   {
     name: 'swarm',

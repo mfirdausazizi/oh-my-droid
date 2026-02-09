@@ -35,7 +35,7 @@ The orchestrator analyzes your task and:
 
 ## Parallel Execution
 
-When ultrawork is active:
+When high-parallel execution is needed:
 1. Spawn 5-10+ agents minimum
 2. No limit on concurrent agents
 3. Never do sequential what can be parallel

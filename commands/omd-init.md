@@ -23,8 +23,8 @@ Set up the Oh-My-Droid orchestration system for the user.
    - Create `.omd/state/` directory for state files
 
 4. **Report success** with instructions on how to use:
-   - Magic keywords: autopilot:, ralph:, ultrawork:, swarm:
-   - Available commands: /autopilot, /ralph, /ultrawork, /plan, /swarm
+   - Magic keywords: ship:, autopilot:, ralph:, plan:, swarm:
+   - Available commands: /omd-ship, /omd-autopilot, /omd-ralph, /omd-plan, /omd-swarm
    - Tiered droids for smart delegation
 
 $ARGUMENTS
