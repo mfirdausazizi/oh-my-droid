@@ -5,7 +5,6 @@
  * Custom slash commands for Droid CLI
  */
 
-import { readFileSync, existsSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -39,9 +38,28 @@ Enter AUTOPILOT mode. Execute the following task with medium autonomy:
 Task: {{args}}
 `,
   },
+  'omd-ship': {
+    name: 'omd-ship',
+    description: 'Recommended primary flow: deepsearch/analyze -> ralplan -> ralph -> code-review',
+    usage: '/omd-ship [task description]',
+    category: 'workflow',
+    prompt: `
+Enter SHIP workflow mode. Execute this staged flow with concise handoff between stages:
+
+Stage 1 (Discovery) - Auto-pick using this explicit rule:
+- deepsearch = find where/how implemented
+- analyze = explain behavior/root cause/tradeoffs
+
+Stage 2 (Planning): run ralplan
+Stage 3 (Execution): run ralph
+Stage 4 (Review): run code-review
+
+Task: {{args}}
+`,
+  },
   ultrawork: {
     name: 'ultrawork',
-    description: 'Maximum parallel execution with multiple custom droids',
+    description: '[Soft-deprecated] Maximum parallel execution with multiple custom droids',
     usage: '/ultrawork [task description]',
     category: 'execution',
     prompt: `

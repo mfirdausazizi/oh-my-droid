@@ -5,6 +5,8 @@ description: Use when user needs maximum parallelism, multiple agents working si
 
 # Ultrawork Skill
 
+> ⚠️ **Soft-deprecated:** Prefer `ship:` (or `/omd-ship`) for the primary end-to-end workflow.
+
 ## When to Use
 
 Use Ultrawork mode when you need:

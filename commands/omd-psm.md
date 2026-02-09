@@ -5,6 +5,8 @@ argument-hint: <review|fix|feature|list|attach|kill|cleanup> <args>
 
 # Project Session Manager (PSM)
 
+> ⚠️ **Soft-deprecated:** Prefer `/omd-ship [task description]` for the primary end-to-end workflow.
+
 [PSM ACTIVATED - SESSION MANAGEMENT MODE]
 
 Manage isolated development environments using git worktrees and tmux sessions.

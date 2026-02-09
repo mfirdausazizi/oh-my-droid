@@ -5,6 +5,8 @@ description: Use when user needs autonomous QA cycling - test, verify, fix, repe
 
 # UltraQA Skill
 
+> ⚠️ **Soft-deprecated:** Prefer `ship:` (or `/omd-ship`) for the primary end-to-end workflow.
+
 [ULTRAQA ACTIVATED - AUTONOMOUS QA CYCLING]
 
 Autonomous QA cycling workflow that runs until your quality goal is met.

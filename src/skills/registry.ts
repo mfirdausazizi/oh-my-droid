@@ -24,6 +24,23 @@ When autopilot mode is active:
     triggerPatterns: ['autopilot:', 'auto:', 'build me', 'create a'],
   },
   {
+    name: 'ship',
+    description: 'Recommended primary flow: discover, plan, execute, and review',
+    instructions: `
+When ship mode is active:
+1. Stage 1: Auto-pick discovery mode using this explicit rule:
+   - Use deepsearch to find where/how something is implemented
+   - Use analyze to explain behavior, root cause, or tradeoffs
+2. Output concise Stage 1 handoff (chosen mode, key findings, planning focus)
+3. Stage 2: Run ralplan using Stage 1 findings
+4. Output concise Stage 2 handoff (plan summary, risks/assumptions)
+5. Stage 3: Run ralph to execute until verified complete
+6. Output concise Stage 3 handoff (changes + verification)
+7. Stage 4: Run code-review and report final recommendation
+`,
+    triggerPatterns: ['ship:', '/omd-ship', 'ship workflow'],
+  },
+  {
     name: 'ultrawork',
     description: 'Maximum parallel execution with multiple custom droids',
     instructions: `
@@ -186,7 +203,7 @@ export function detectSkillFromPrompt(prompt: string): SkillDefinition | null {
   const lowerPrompt = prompt.toLowerCase();
 
   for (const skill of CORE_SKILLS) {
-    for (const pattern of skill.triggerPatterns) {
+    for (const pattern of skill.triggerPatterns ?? []) {
       if (lowerPrompt.includes(pattern.toLowerCase())) {
         return skill;
       }

@@ -75,6 +75,7 @@ export interface PluginConfig {
   // Magic keyword customization
   magicKeywords?: {
     autopilot?: string[];
+    ship?: string[];
     ultrawork?: string[];
     ralph?: string[];
     ultrapilot?: string[];

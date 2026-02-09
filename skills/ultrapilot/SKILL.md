@@ -5,6 +5,8 @@ description: Use when user needs parallel autopilot with file ownership partitio
 
 # Ultrapilot Skill
 
+> ⚠️ **Soft-deprecated:** Prefer `ship:` (or `/omd-ship`) for the primary end-to-end workflow.
+
 [ULTRAPILOT ACTIVATED - PARALLEL AUTONOMOUS EXECUTION MODE]
 
 Parallel autopilot that spawns multiple workers with file ownership partitioning for maximum speed.

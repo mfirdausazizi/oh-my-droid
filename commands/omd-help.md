@@ -22,18 +22,17 @@ Include these words naturally in your request for explicit control:
 
 | Keyword | Effect | Example |
 |---------|--------|---------|
+| **ship:** | Primary end-to-end flow | "ship: add retry logic to API" |
 | **ralph:** | Persistence mode | "ralph: fix all the bugs" |
-| **ultrawork:** or **ulw:** | Max parallelism | "ulw refactor the API" |
 | **plan:** | Planning interview | "plan the new endpoints" |
-| **eco:** | Token-efficient mode | "eco: add validation" |
 
 ## Available Commands
 
 | Command | Description |
 |---------|-------------|
 | `/omd-init` | One-time setup |
+| `/omd-ship` | Recommended primary flow (discover -> plan -> execute -> review) |
 | `/omd-autopilot` | Autonomous execution |
-| `/omd-ultrawork` | Maximum parallelism |
 | `/omd-ralph` | Persistence mode |
 | `/omd-plan` | Specification mode |
 | `/omd-swarm` | Multi-agent coordination |
@@ -42,6 +41,17 @@ Include these words naturally in your request for explicit control:
 | `/omd-analyze` | Deep analysis |
 | `/omd-doctor` | System diagnostics |
 | `/omd-help` | This help |
+
+## Soft-deprecated
+
+These commands are soft-deprecated; prefer `/omd-ship` for the default workflow:
+
+- `/omd-ultraqa`
+- `/omd-ultrawork`
+- `/omd-ultrapilot`
+- `/omd-ecomode`
+- `/omd-tdd`
+- `/omd-psm`
 
 ## First Time Setup
 

@@ -9,6 +9,7 @@ import { readFileSync } from 'fs';
 const KEYWORDS = {
   'autopilot:': { skill: 'autopilot', description: 'Full autonomous execution' },
   'auto:': { skill: 'autopilot', description: 'Full autonomous execution' },
+  'ship:': { skill: 'ship', description: 'Primary ship workflow' },
   'ralph:': { skill: 'ralph', description: 'Persistence mode' },
   'persist:': { skill: 'ralph', description: 'Persistence mode' },
   "don't stop until": { skill: 'ralph', description: 'Persistence mode' },

@@ -5,11 +5,10 @@
  * Special trigger words that activate enhanced behaviors
  */
 
-import type { MagicKeyword } from '../shared/types.js';
-
 // Default magic keyword triggers
 export const DEFAULT_MAGIC_KEYWORDS: Record<string, string[]> = {
   autopilot: ['autopilot:', 'auto:', 'build me', 'create a'],
+  ship: ['ship:', 'ship mode', 'ship workflow'],
   ultrawork: ['ultrawork:', 'ulw:', 'maximum parallel', 'parallel everything'],
   ralph: ['ralph:', 'persist:', "don't stop until", 'keep going until'],
   ultrapilot: ['ultrapilot:', 'ulp:', 'parallel autopilot'],
@@ -24,6 +23,7 @@ export const DEFAULT_MAGIC_KEYWORDS: Record<string, string[]> = {
 // Mode descriptions for user feedback
 export const MODE_DESCRIPTIONS: Record<string, string> = {
   autopilot: 'Full autonomous execution with medium auto-run level',
+  ship: 'Recommended primary flow: discover, plan, execute, and review',
   ultrawork: 'Maximum parallel execution with multiple custom droids',
   ralph: 'Persistence mode - continues until verified complete',
   ultrapilot: 'Parallel autonomous execution',
@@ -131,6 +131,20 @@ You are in AUTOPILOT mode. Execute tasks with medium autonomy (--auto medium).
 - You cannot push to git or run destructive commands
 - Always verify before claiming completion
 </autopilot-mode>`,
+
+    ship: `<ship-mode>
+SHIP WORKFLOW MODE. Run this four-stage delivery flow:
+
+Stage 1 (Discovery): Auto-pick using this explicit rule:
+- Use deepsearch to find where/how something is implemented
+- Use analyze to explain behavior, root cause, or tradeoffs
+
+Stage 2 (Planning): Run ralplan from Stage 1 findings.
+Stage 3 (Execution): Run ralph until verified complete.
+Stage 4 (Review): Run code-review and provide recommendation.
+
+Output concise handoff between stages.
+</ship-mode>`,
 
     ultrawork: `<ultrawork-mode>
 MAXIMUM PARALLEL EXECUTION MODE.

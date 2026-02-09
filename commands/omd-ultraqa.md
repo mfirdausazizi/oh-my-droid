@@ -5,6 +5,8 @@ argument-hint: [--tests|--build|--lint|--typecheck|--custom] <goal>
 
 # UltraQA
 
+> ⚠️ **Soft-deprecated:** Prefer `/omd-ship [task description]` for the primary end-to-end workflow.
+
 [ULTRAQA ACTIVATED - AUTONOMOUS QA CYCLING]
 
 Autonomous QA cycling workflow that runs until your quality goal is met.

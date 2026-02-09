@@ -5,6 +5,8 @@ description: Use when user wants Test-Driven Development enforcement - write tes
 
 # TDD Mode
 
+> ⚠️ **Soft-deprecated:** Prefer `ship:` (or `/omd-ship`) for the primary end-to-end workflow.
+
 [TDD MODE ACTIVATED]
 
 ## The Iron Law

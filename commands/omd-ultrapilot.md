@@ -5,6 +5,8 @@ argument-hint: <task>
 
 # Ultrapilot Command
 
+> ⚠️ **Soft-deprecated:** Prefer `/omd-ship [task description]` for the primary end-to-end workflow.
+
 [ULTRAPILOT ACTIVATED - PARALLEL AUTONOMOUS EXECUTION MODE]
 
 Parallel autopilot that spawns multiple workers with file ownership partitioning for maximum speed.

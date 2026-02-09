@@ -5,6 +5,8 @@ argument-hint: <task>
 
 # Ecomode
 
+> ⚠️ **Soft-deprecated:** Prefer `/omd-ship [task description]` for the primary end-to-end workflow.
+
 [ECOMODE ACTIVATED - TOKEN-EFFICIENT EXECUTION]
 
 Activates token-efficient parallel execution for users who prioritize cost efficiency over maximum capability.

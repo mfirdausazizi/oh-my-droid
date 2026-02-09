@@ -5,6 +5,8 @@ description: Use when user needs Project Session Manager for isolated dev enviro
 
 # Project Session Manager (PSM)
 
+> ⚠️ **Soft-deprecated:** Prefer `ship:` (or `/omd-ship`) for the primary end-to-end workflow.
+
 Manage isolated development environments using git worktrees and tmux sessions.
 
 ## Commands

@@ -4,6 +4,8 @@ description: Test-driven development workflow
 
 # TDD Mode
 
+> ⚠️ **Soft-deprecated:** Prefer `/omd-ship [task description]` for the primary end-to-end workflow.
+
 Test-driven development workflow: write tests first, then implement.
 
 ## Usage

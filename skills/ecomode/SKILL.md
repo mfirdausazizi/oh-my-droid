@@ -5,6 +5,8 @@ description: Use when user wants to minimize token usage, or uses 'eco:', 'ecomo
 
 # Ecomode Skill
 
+> ⚠️ **Soft-deprecated:** Prefer `ship:` (or `/omd-ship`) for the primary end-to-end workflow.
+
 Token-efficient execution that minimizes API costs.
 
 ## When to Use
