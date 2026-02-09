@@ -18,7 +18,7 @@ Spawn multiple research agents to deeply investigate a topic.
 
 2. **Spawn parallel researchers**:
    - `librarian` - Search codebase for existing patterns
-   - `researcher` - Search external docs and best practices
+   - `researcher` - Use available MCP docs tools first (e.g., Context7), then search external docs and best practices
    - `researcher-low` - Quick API lookups
 
 3. **Synthesize findings** into actionable recommendations

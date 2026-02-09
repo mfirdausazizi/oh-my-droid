@@ -20,18 +20,23 @@ Deep research mode for investigating topics, technologies, APIs, or libraries.
    - What specific questions need answering?
    - What's the context/use case?
 
-2. **Gather Information**
-   - Search documentation
-   - Check official examples
-   - Look at community patterns
-   - Review related codebases
+2. **Discover Available MCP Tools**
+   - Check available tools for MCP-backed documentation/research providers
+   - If `context7___resolve-library-id` and `context7___query-docs` are available, use them first for library/framework docs
+   - If topic-specific MCP tools are available, prefer those authoritative sources before general web search
 
-3. **Analyze Findings**
+3. **Gather Information**
+   - Query MCP sources first (Context7 or other available MCP)
+   - Search official documentation and examples
+   - Look at community patterns and references
+   - Review related codebases when relevant
+
+4. **Analyze Findings**
    - Compare approaches
    - Identify trade-offs
    - Note gotchas and pitfalls
 
-4. **Synthesize**
+5. **Synthesize**
    - Summarize key findings
    - Provide recommendations
    - Include code examples
@@ -63,4 +68,4 @@ Deep research mode for investigating topics, technologies, APIs, or libraries.
 
 ## Agent Delegation
 
-Uses `researcher` or `librarian` agents for comprehensive research with web search and documentation lookup capabilities.
+Uses `researcher` or `librarian` agents for comprehensive research. Prefer MCP-backed sources when available (especially Context7 for library docs), then use web search for gaps.
