@@ -1,14 +1,29 @@
 ---
 description: Toggle smart model assignment for custom droids
-argument-hint: <on|off|status>
 ---
 
-Manage smart model assignment runtime bridge.
+Manage smart model assignment runtime bridge with interactive selection.
 
-1. Set `action` to `$ARGUMENTS`; if empty, use `status`.
-2. Try running:
-   - `omd setting smart-model-assignment <action>`
-3. If `omd` is not found, run local fallback from current repo:
-   - If `dist/cli/index.js` is missing, run `npm run build`
-   - Then run `node dist/cli/index.js setting smart-model-assignment <action>`
-4. Return command output and exit code.
+1. Use AskUser with exactly this questionnaire:
+
+   1. [question] Smart model assignment action?
+   [topic] Smart-Model-Assignment
+   [option] Enable
+   [option] Disable
+   [option] Status
+
+2. Based on selected action, perform backend update directly (no `omd` command):
+   - Target droid dirs: `./.factory/droids` and `~/.factory/droids`
+   - State file: `~/.omd/state/smart-model-assignment.json`
+
+3. Behavior:
+   - **Disable**: for each droid markdown frontmatter with `model:` not `inherit`, save original model to `snapshots[filePath]`, then set `model: inherit`.
+   - **Enable**: for each droid file with a snapshot, restore `model:` from `snapshots[filePath]`.
+   - **Status**: report current enabled flag and summary counts of scanned/changed/skipped files.
+
+4. Persist state JSON as:
+   - `enabled` (boolean)
+   - `snapshots` (map of file path to original model)
+   - `updatedAt` (ISO timestamp)
+
+5. Return a concise result summary.

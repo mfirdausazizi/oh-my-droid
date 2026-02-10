@@ -206,15 +206,19 @@ Run Oh-My-Droid setup:
   'omd-setting': {
     name: 'omd-setting',
     description: 'Toggle smart model assignment for custom droids',
-    usage: '/omd-setting [on|off|status]',
+    usage: '/omd-setting',
     category: 'utility',
     prompt: `
-Manage smart model assignment runtime bridge:
-- action = {{args}} (default to status when empty)
-- try: omd setting smart-model-assignment <action>
-- if omd is not found: build local CLI if needed, then run
-  node dist/cli/index.js setting smart-model-assignment <action>
-- return command output and exit code
+Manage smart model assignment runtime bridge with interactive selection:
+
+1) Ask user using AskUser with options: Enable / Disable / Status.
+2) Execute backend update directly (no omd CLI dependency):
+   - droid dirs: ./.factory/droids and ~/.factory/droids
+   - state file: ~/.omd/state/smart-model-assignment.json
+3) Disable: snapshot current non-inherit model, then set model to inherit.
+4) Enable: restore model from snapshot where available.
+5) Status: report enabled flag and scanned/changed/skipped counts.
+6) Return concise result summary.
 `,
   },
 };
