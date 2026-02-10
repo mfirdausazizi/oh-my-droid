@@ -210,11 +210,11 @@ Run Oh-My-Droid setup:
     category: 'utility',
     prompt: `
 Manage smart model assignment runtime bridge:
-- /omd-setting on - Enable smart model assignment and restore droid models
-- /omd-setting off - Disable smart model assignment and set droid models to inherit
-- /omd-setting status - Show current status
-
-Action: {{args}}
+- action = {{args}} (default to status when empty)
+- try: omd setting smart-model-assignment <action>
+- if omd is not found: build local CLI if needed, then run
+  node dist/cli/index.js setting smart-model-assignment <action>
+- return command output and exit code
 `,
   },
 };
