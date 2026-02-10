@@ -203,6 +203,20 @@ Run Oh-My-Droid setup:
 4. Initialize project
 `,
   },
+  'omd-setting': {
+    name: 'omd-setting',
+    description: 'Toggle smart model assignment for custom droids',
+    usage: '/omd-setting [on|off|status]',
+    category: 'utility',
+    prompt: `
+Manage smart model assignment runtime bridge:
+- /omd-setting on - Enable smart model assignment and restore droid models
+- /omd-setting off - Disable smart model assignment and set droid models to inherit
+- /omd-setting status - Show current status
+
+Action: {{args}}
+`,
+  },
 };
 
 /**

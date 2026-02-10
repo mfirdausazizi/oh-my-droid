@@ -10,6 +10,7 @@ import chalk from 'chalk';
 import { install, uninstall, isInstalled, getInstallInfo, installProject } from '../installer/index.js';
 import { getAgentDefinitions } from '../agents/definitions.js';
 import { listCommands } from '../commands/index.js';
+import { getSmartModelAssignmentStatus, setSmartModelAssignment } from '../config/smart-model-assignment.js';
 import { VERSION, PACKAGE_NAME } from '../index.js';
 
 const program = new Command();
@@ -134,6 +135,64 @@ program
     } else {
       console.log(chalk.red('✗ Setup failed'));
       result.errors.forEach((err) => console.log(chalk.red(`  - ${err}`)));
+    }
+  });
+
+// Settings command
+program
+  .command('setting')
+  .description('Manage OMD settings')
+  .argument('<key>', 'Setting key (currently supports smart-model-assignment)')
+  .argument('[value]', 'on | off | status')
+  .action((key: string, value?: string) => {
+    if (key !== 'smart-model-assignment') {
+      console.log(chalk.red(`Unsupported setting: ${key}`));
+      console.log(chalk.gray('Supported settings: smart-model-assignment'));
+      return;
+    }
+
+    const normalized = (value || 'status').toLowerCase();
+    if (normalized === 'status') {
+      const enabled = getSmartModelAssignmentStatus();
+      console.log(
+        chalk.blue(
+          `smart-model-assignment: ${enabled ? chalk.green('enabled') : chalk.yellow('disabled')}`
+        )
+      );
+      return;
+    }
+
+    if (!['on', 'off'].includes(normalized)) {
+      console.log(chalk.red(`Invalid value: ${value}`));
+      console.log(chalk.gray('Use: on | off | status'));
+      return;
+    }
+
+    const enabled = normalized === 'on';
+    const result = setSmartModelAssignment(enabled);
+
+    if (!result.applied) {
+      console.log(chalk.red('Failed to update smart-model-assignment'));
+      result.errors.forEach((error) => console.log(chalk.red(`  - ${error}`)));
+      process.exitCode = 1;
+      return;
+    }
+
+    console.log(
+      chalk.blue(
+        `smart-model-assignment ${enabled ? chalk.green('enabled') : chalk.yellow('disabled')}`
+      )
+    );
+    console.log(chalk.gray(`Scanned: ${result.scannedFiles}`));
+    console.log(chalk.gray(`Changed: ${result.changedFiles}`));
+    if (enabled) {
+      console.log(chalk.gray(`Restored: ${result.restoredFiles}`));
+    }
+    if (result.skippedFiles > 0) {
+      console.log(chalk.gray(`Skipped: ${result.skippedFiles}`));
+    }
+    if (result.errors.length > 0) {
+      result.errors.forEach((error) => console.log(chalk.yellow(`Warning: ${error}`)));
     }
   });
 

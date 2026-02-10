@@ -89,6 +89,7 @@ export interface PluginConfig {
   // Intelligent model routing configuration
   routing?: {
     enabled?: boolean;
+    smartModelAssignmentEnabled?: boolean;
     defaultTier?: 'LOW' | 'MEDIUM' | 'HIGH';
     escalationEnabled?: boolean;
     maxEscalations?: number;

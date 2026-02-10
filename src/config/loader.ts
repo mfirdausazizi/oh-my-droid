@@ -76,6 +76,7 @@ export const DEFAULT_CONFIG: PluginConfig = {
   },
   routing: {
     enabled: true,
+    smartModelAssignmentEnabled: true,
     defaultTier: 'MEDIUM',
     escalationEnabled: true,
     maxEscalations: 2,
