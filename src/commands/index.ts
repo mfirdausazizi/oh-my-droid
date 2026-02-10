@@ -216,7 +216,7 @@ Manage smart model assignment runtime bridge with interactive selection:
    - droid dirs: ./.factory/droids and ~/.factory/droids
    - state file: ~/.omd/state/smart-model-assignment.json
 3) Disable: snapshot current non-inherit model, then set model to inherit.
-4) Enable: restore model from snapshot where available.
+4) Enable: restore snapshot when usable; otherwise select from ~/.factory/settings.json customModels using tier-aware fallback, else inherit.
 5) Status: report enabled flag and scanned/changed/skipped counts.
 6) Return concise result summary.
 `,

@@ -18,7 +18,7 @@ Manage smart model assignment runtime bridge with interactive selection.
 
 3. Behavior:
    - **Disable**: for each droid markdown frontmatter with `model:` not `inherit`, save original model to `snapshots[filePath]`, then set `model: inherit`.
-   - **Enable**: for each droid file with a snapshot, restore `model:` from `snapshots[filePath]`.
+   - **Enable**: for each droid file, restore snapshot if usable; otherwise choose from `~/.factory/settings.json` `customModels` (tier-aware heuristic), otherwise use `inherit`.
    - **Status**: report current enabled flag and summary counts of scanned/changed/skipped files.
 
 4. Persist state JSON as:

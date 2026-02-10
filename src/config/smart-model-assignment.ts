@@ -1,11 +1,12 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, writeFileSync } from 'fs';
 import { homedir } from 'os';
-import { join } from 'path';
+import { basename, join } from 'path';
 
 const OMD_CONFIG_DIR = join(homedir(), '.omd');
 const OMD_STATE_DIR = join(OMD_CONFIG_DIR, 'state');
 const GLOBAL_CONFIG_PATH = join(OMD_CONFIG_DIR, 'config.json');
 const STATE_PATH = join(OMD_STATE_DIR, 'smart-model-assignment.json');
+const FACTORY_SETTINGS_PATH = join(homedir(), '.factory', 'settings.json');
 
 interface SmartModelState {
   enabled: boolean;
@@ -43,6 +44,33 @@ function readState(): SmartModelState {
     };
   } catch {
     return { enabled: true, snapshots: {}, updatedAt: new Date().toISOString() };
+  }
+}
+
+function readAvailableCustomModels(): string[] {
+  if (!existsSync(FACTORY_SETTINGS_PATH)) return [];
+
+  try {
+    const parsed = JSON.parse(readFileSync(FACTORY_SETTINGS_PATH, 'utf-8')) as {
+      customModels?: Array<{ id?: unknown; model?: unknown }>;
+    };
+
+    const models: string[] = [];
+    for (const item of parsed.customModels ?? []) {
+      if (typeof item.id === 'string' && item.id.trim().length > 0) {
+        const normalizedId = item.id.trim();
+        models.push(normalizedId.startsWith('custom:') ? normalizedId : `custom:${normalizedId}`);
+      }
+
+      if (typeof item.model === 'string' && item.model.trim().length > 0) {
+        const normalizedModel = item.model.trim();
+        models.push(normalizedModel.startsWith('custom:') ? normalizedModel : `custom:${normalizedModel}`);
+      }
+    }
+
+    return Array.from(new Set(models));
+  } catch {
+    return [];
   }
 }
 
@@ -149,6 +177,101 @@ function replaceModel(frontmatter: string, model: string): string {
   return frontmatter.replace(/^model:\s*(.+)$/m, `model: ${model}`);
 }
 
+function readFallbackModel(frontmatter: string): string | null {
+  const match = frontmatter.match(/^#\s*fallbackModel:\s*(.+)$/m);
+  return match ? match[1].trim() : null;
+}
+
+function isCustomModel(model: string): boolean {
+  return model.startsWith('custom:');
+}
+
+function customModelId(model: string): string {
+  return model.startsWith('custom:') ? model.slice('custom:'.length) : model;
+}
+
+function isModelUsable(model: string, availableCustomModels: Set<string>): boolean {
+  if (model === 'inherit') return true;
+  if (!isCustomModel(model)) return true;
+  const modelId = customModelId(model);
+  return availableCustomModels.has(modelId) || availableCustomModels.has(`custom:${modelId}`);
+}
+
+function inferTier(filePath: string): 'LOW' | 'MEDIUM' | 'HIGH' {
+  const name = basename(filePath, '.md').toLowerCase();
+  if (name.endsWith('-low')) return 'LOW';
+  if (name.endsWith('-medium')) return 'MEDIUM';
+  if (name.endsWith('-high')) return 'HIGH';
+  return 'MEDIUM';
+}
+
+function pickByKeywords(models: string[], keywords: string[]): string | null {
+  for (const model of models) {
+    const lowered = model.toLowerCase();
+    if (keywords.some((keyword) => lowered.includes(keyword))) {
+      return model;
+    }
+  }
+  return null;
+}
+
+function pickTierDefaultModel(tier: 'LOW' | 'MEDIUM' | 'HIGH', availableCustomModels: string[]): string | null {
+  if (availableCustomModels.length === 0) return null;
+
+  if (tier === 'LOW') {
+    return (
+      pickByKeywords(availableCustomModels, ['haiku', 'mini', 'flash', 'small', 'lite'])
+      ?? availableCustomModels[0]
+    );
+  }
+
+  if (tier === 'HIGH') {
+    return (
+      pickByKeywords(availableCustomModels, ['opus', 'high', 'max', 'pro'])
+      ?? availableCustomModels[0]
+    );
+  }
+
+  return (
+    pickByKeywords(availableCustomModels, ['sonnet', 'medium', 'codex'])
+    ?? availableCustomModels[0]
+  );
+}
+
+function resolveEnableTargetModel(
+  filePath: string,
+  parsedFrontmatter: string,
+  currentModel: string | null,
+  snapshotModel: string | undefined,
+  availableCustomModels: string[],
+): string {
+  const availableSet = new Set(availableCustomModels);
+  const fallbackModel = readFallbackModel(parsedFrontmatter);
+
+  if (snapshotModel && snapshotModel !== 'inherit' && isModelUsable(snapshotModel, availableSet)) {
+    return snapshotModel;
+  }
+
+  if (fallbackModel && fallbackModel !== 'inherit' && isModelUsable(fallbackModel, availableSet)) {
+    return fallbackModel;
+  }
+
+  const tierDefault = pickTierDefaultModel(inferTier(filePath), availableCustomModels);
+  if (tierDefault) {
+    return tierDefault;
+  }
+
+  if (currentModel && currentModel !== 'inherit' && isModelUsable(currentModel, availableSet)) {
+    return currentModel;
+  }
+
+  if (snapshotModel && isModelUsable(snapshotModel, availableSet)) {
+    return snapshotModel;
+  }
+
+  return 'inherit';
+}
+
 export function getSmartModelAssignmentStatus(): boolean {
   const configured = readConfiguredEnabled();
   if (configured !== null) return configured;
@@ -158,6 +281,7 @@ export function getSmartModelAssignmentStatus(): boolean {
 export function setSmartModelAssignment(enabled: boolean, cwd: string = process.cwd()): RuntimeBridgeResult {
   const state = readState();
   const files = getDroidFiles(cwd);
+  const availableCustomModels = readAvailableCustomModels();
 
   type PlannedUpdate = {
     filePath: string;
@@ -173,7 +297,16 @@ export function setSmartModelAssignment(enabled: boolean, cwd: string = process.
   let skippedFiles = 0;
 
   for (const filePath of files) {
-    const content = readFileSync(filePath, 'utf-8');
+    let content: string;
+    try {
+      content = readFileSync(filePath, 'utf-8');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Unknown read error';
+      errors.push(`Failed reading ${filePath}: ${message}`);
+      skippedFiles += 1;
+      continue;
+    }
+
     const parsed = parseFrontmatter(content);
 
     if (!parsed) {
@@ -182,12 +315,19 @@ export function setSmartModelAssignment(enabled: boolean, cwd: string = process.
     }
 
     const currentModel = readModel(parsed.frontmatter);
-    if (!currentModel) {
-      skippedFiles += 1;
-      continue;
-    }
 
     if (!enabled) {
+      if (!currentModel) {
+        const updatedFrontmatter = replaceModel(parsed.frontmatter, 'inherit');
+        updates.push({
+          filePath,
+          nextContent: composeFrontmatter(updatedFrontmatter, parsed.body, parsed.newline),
+          originalContent: content,
+        });
+        changedFiles += 1;
+        continue;
+      }
+
       if (currentModel !== 'inherit') {
         state.snapshots[filePath] = currentModel;
         const updatedFrontmatter = replaceModel(parsed.frontmatter, 'inherit');
@@ -201,21 +341,25 @@ export function setSmartModelAssignment(enabled: boolean, cwd: string = process.
       continue;
     }
 
-    const originalModel = state.snapshots[filePath];
-    if (!originalModel) {
-      skippedFiles += 1;
-      continue;
-    }
+    const targetModel = resolveEnableTargetModel(
+      filePath,
+      parsed.frontmatter,
+      currentModel,
+      state.snapshots[filePath],
+      availableCustomModels,
+    );
 
-    if (currentModel !== originalModel) {
-      const updatedFrontmatter = replaceModel(parsed.frontmatter, originalModel);
+    if (currentModel !== targetModel) {
+      const updatedFrontmatter = replaceModel(parsed.frontmatter, targetModel);
       updates.push({
         filePath,
         nextContent: composeFrontmatter(updatedFrontmatter, parsed.body, parsed.newline),
         originalContent: content,
       });
       changedFiles += 1;
-      restoredFiles += 1;
+      if (state.snapshots[filePath] && targetModel === state.snapshots[filePath]) {
+        restoredFiles += 1;
+      }
     }
   }
 
