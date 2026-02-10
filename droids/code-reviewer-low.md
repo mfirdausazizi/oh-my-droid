@@ -1,7 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: code-reviewer-low
 description: Quick code review for simple changes and obvious issues
-model: inherit
+model: custom:CC:-Haiku-4.5-2
 tools: ["Read", "Grep", "Glob"]
 ---
 

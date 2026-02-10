@@ -1,7 +1,8 @@
 ---
+# fallbackModel: custom:GPT-5.3-Codex-(Medium)-5
 name: code-reviewer
 description: Expert code review specialist. Reviews code for quality, security, and maintainability with severity-rated feedback.
-model: inherit
+model: custom:CC:-Sonnet-4.5-1
 tools: ["Read", "Grep", "Glob", "LS"]
 ---
 

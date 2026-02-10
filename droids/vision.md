@@ -1,7 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Opus-4.6-0
 name: vision
 description: Visual/media file analyzer for images, PDFs, and diagrams
-model: inherit
+model: custom:Gemini-CLI-3-Flash-Preview-9
 tools: ["Read"]
 ---
 

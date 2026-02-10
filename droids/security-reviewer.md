@@ -1,6 +1,9 @@
 ---
+# fallbackModel: custom:GPT-5.3-Codex-(High)-4
 name: security-reviewer
 description: Security auditing specialist for identifying vulnerabilities
+model: custom:CC:-Opus-4.6-0
+reasoningEffort: high
 tools: ["Read", "Grep", "Glob", "LS", "Execute"]
 ---
 

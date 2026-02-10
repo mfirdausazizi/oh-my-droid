@@ -1,6 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: designer-high
 description: Complex UI/UX work with full toolset
+model: custom:GPT-5.3-Codex-(High)-4
 tools: ["Read", "Grep", "Glob", "LS", "Edit", "Create", "Execute"]
 ---
 

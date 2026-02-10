@@ -3,7 +3,7 @@
  * Adapted from oh-my-claudecode
  */
 
-export type ModelType = 'inherit' | 'claude-opus' | 'claude-sonnet' | 'claude-haiku' | 'custom';
+export type ModelType = 'inherit' | 'claude-opus' | 'claude-sonnet' | 'claude-haiku' | `custom:${string}`;
 
 export interface AgentPromptMetadata {
   category: 'advisor' | 'specialist' | 'orchestrator' | 'research' | 'creative';
@@ -24,6 +24,7 @@ export interface AgentConfig {
   tools: string[];
   model?: ModelType;
   defaultModel?: ModelType;
+  fallbackModel?: ModelType;
   reasoningEffort?: 'low' | 'medium' | 'high';
   metadata?: AgentPromptMetadata;
 }

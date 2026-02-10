@@ -84,6 +84,11 @@ export const DEFAULT_CONFIG: PluginConfig = {
       MEDIUM: 'claude-sonnet',
       HIGH: 'claude-opus',
     },
+    fallbackModels: {
+      LOW: 'claude-sonnet',
+      MEDIUM: 'claude-sonnet',
+      HIGH: 'claude-opus',
+    },
   },
 };
 

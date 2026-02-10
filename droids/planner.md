@@ -1,6 +1,9 @@
 ---
+# fallbackModel: custom:GPT-5.3-Codex-(High)-4
 name: planner
 description: High-level planning and task breakdown
+model: custom:CC:-Opus-4.6-0
+reasoningEffort: high
 tools: ["Read", "Grep", "Glob", "LS"]
 ---
 

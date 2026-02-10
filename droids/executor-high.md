@@ -1,6 +1,9 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: executor-high
 description: Complex implementations requiring full toolset
+model: custom:GPT-5.3-Codex-(High)-4
+reasoningEffort: high
 tools: ["Read", "Grep", "Glob", "LS", "Edit", "Create", "Execute"]
 ---
 

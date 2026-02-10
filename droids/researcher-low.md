@@ -1,6 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: researcher-low
 description: Quick lookups and simple research
+model: custom:CC:-Haiku-4.5-2
 tools: ["Read", "Grep", "Glob", "LS", "WebSearch", "FetchUrl"]
 ---
 

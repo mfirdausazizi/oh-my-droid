@@ -1,7 +1,8 @@
 ---
+# fallbackModel: custom:GPT-5.3-Codex-(Medium)-5
 name: git-master
 description: Git expert for atomic commits, rebasing, and history management with style detection
-model: inherit
+model: custom:CC:-Sonnet-4.5-1
 tools: ["Read", "Grep", "Execute"]
 ---
 

@@ -3,7 +3,7 @@
  * Adapted from oh-my-claudecode for Factory Droid
  */
 
-export type ModelType = 'inherit' | 'claude-opus' | 'claude-sonnet' | 'claude-haiku' | 'custom';
+export type ModelType = 'inherit' | 'claude-opus' | 'claude-sonnet' | 'claude-haiku' | `custom:${string}`;
 
 export type ToolCategory = 'read-only' | 'edit' | 'execute' | 'web' | 'mcp' | 'all';
 
@@ -11,6 +11,7 @@ export interface DroidConfig {
   name: string;
   description: string;
   model: ModelType;
+  fallbackModel?: ModelType;
   reasoningEffort?: 'low' | 'medium' | 'high';
   tools: string[] | ToolCategory;
   prompt: string;
@@ -23,6 +24,7 @@ export interface AgentConfig {
   tools: string[];
   model?: ModelType;
   defaultModel?: ModelType;
+  fallbackModel?: ModelType;
   reasoningEffort?: 'low' | 'medium' | 'high';
 }
 
@@ -91,6 +93,11 @@ export interface PluginConfig {
     escalationEnabled?: boolean;
     maxEscalations?: number;
     tierModels?: {
+      LOW?: string;
+      MEDIUM?: string;
+      HIGH?: string;
+    };
+    fallbackModels?: {
       LOW?: string;
       MEDIUM?: string;
       HIGH?: string;
@@ -211,6 +218,7 @@ export interface CustomDroidTemplate {
   name: string;
   description: string;
   model: ModelType;
+  fallbackModel?: ModelType;
   reasoningEffort?: 'low' | 'medium' | 'high';
   tools: string[] | ToolCategory;
   systemPrompt: string;

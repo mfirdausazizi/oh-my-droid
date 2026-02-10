@@ -1,7 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: tdd-guide
 description: Test-Driven Development specialist enforcing write-tests-first methodology
-model: inherit
+model: custom:GPT-5.3-Codex-(Medium)-5
 tools: ["Read", "Grep", "Glob", "Edit", "Execute"]
 ---
 
@@ -45,7 +46,7 @@ export function calculateTotal(items) {
 - Optimize performance
 
 ### Step 6: Verify Coverage
-Target 80%+ coverage.
+Target 80overage.
 
 ## Enforcement Rules
 

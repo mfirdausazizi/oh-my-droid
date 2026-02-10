@@ -1,7 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: tdd-guide-low
 description: Quick TDD guidance for simple test scenarios
-model: inherit
+model: custom:CC:-Haiku-4.5-2
 tools: ["Read", "Grep", "Edit", "Execute"]
 ---
 

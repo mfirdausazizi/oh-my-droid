@@ -1,6 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: designer
 description: UI/UX implementation specialist
+model: custom:GPT-5.3-Codex-(Medium)-5
 tools: ["Read", "Grep", "Glob", "LS", "Edit", "Create"]
 ---
 

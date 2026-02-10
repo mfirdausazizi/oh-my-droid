@@ -1,7 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: build-fixer-low
 description: Quick build error fixer for simple compilation issues
-model: inherit
+model: custom:CC:-Haiku-4.5-2
 tools: ["Read", "Grep", "Edit", "Execute"]
 ---
 

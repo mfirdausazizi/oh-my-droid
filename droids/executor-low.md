@@ -1,6 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: executor-low
 description: Simple code implementations and small changes
+model: custom:CC:-Haiku-4.5-2
 tools: ["Read", "Grep", "Glob", "LS", "Edit", "Create"]
 ---
 

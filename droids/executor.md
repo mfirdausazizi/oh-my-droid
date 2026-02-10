@@ -1,5 +1,6 @@
 ---
 name: executor
+model: inherit
 description: Implementation specialist for writing and modifying code
 tools: ["Read", "Grep", "Glob", "LS", "Execute", "Edit", "Create"]
 ---

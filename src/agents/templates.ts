@@ -5,8 +5,7 @@
  * Generates Droid custom droid files (Markdown with YAML frontmatter)
  */
 
-import type { CustomDroidTemplate, ToolCategory } from '../shared/types.js';
-import { TOOL_CATEGORIES } from './types.js';
+import type { CustomDroidTemplate, ToolCategory, ModelType } from '../shared/types.js';
 
 // Tool category definitions for Droid
 const DROID_TOOL_CATEGORIES: Record<ToolCategory, string[]> = {
@@ -162,17 +161,23 @@ function resolveTools(tools: string[] | ToolCategory): string[] {
 }
 
 /**
+ * Resolve model ID
+ */
+function resolveModelId(model: ModelType): string {
+  if (model === 'inherit') return 'inherit';
+  if (model.startsWith('custom:')) return model;
+  if (model === 'claude-opus') return 'claude-opus-4-5-20251101';
+  if (model === 'claude-sonnet') return 'claude-sonnet-4-5-20250929';
+  if (model === 'claude-haiku') return 'claude-haiku-4-5-20251001';
+  return model;
+}
+
+/**
  * Generate a Droid custom droid file
  */
 export function generateDroidFile(template: CustomDroidTemplate): string {
   const tools = resolveTools(template.tools);
-  const modelId = template.model === 'inherit' 
-    ? 'inherit' 
-    : template.model === 'claude-opus' 
-      ? 'claude-opus-4-5-20251101'
-      : template.model === 'claude-sonnet'
-        ? 'claude-sonnet-4-5-20250929'
-        : 'claude-haiku-4-5-20251001';
+  const modelId = resolveModelId(template.model);
 
   const frontmatter: Record<string, any> = {
     name: template.name,
@@ -194,8 +199,13 @@ export function generateDroidFile(template: CustomDroidTemplate): string {
     })
     .join('\n');
 
+  // Build fallback comment if present
+  const fallbackComment = template.fallbackModel
+    ? `# fallbackModel: ${resolveModelId(template.fallbackModel)}\n`
+    : '';
+
   return `---
-${yamlFrontmatter}
+${fallbackComment}${yamlFrontmatter}
 ---
 
 ${template.systemPrompt}

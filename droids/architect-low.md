@@ -1,6 +1,8 @@
 ---
+# fallbackModel: custom:CC:-Sonnet-4.5-1
 name: architect-low
 description: Quick architecture analysis for simple questions
+model: custom:CC:-Haiku-4.5-2
 tools: ["Read", "Grep", "Glob", "LS"]
 ---
 

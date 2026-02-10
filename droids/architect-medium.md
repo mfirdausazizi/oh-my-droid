@@ -1,6 +1,8 @@
 ---
+# fallbackModel: custom:GPT-5.3-Codex-(Medium)-5
 name: architect-medium
 description: Standard architecture analysis and design
+model: custom:CC:-Sonnet-4.5-1
 tools: ["Read", "Grep", "Glob", "LS", "WebSearch", "FetchUrl"]
 ---
 
